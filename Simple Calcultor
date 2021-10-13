@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main(void)
+ {
+  int n;
+  float a,b;
+  printf("Choose a no of operation \n1) Addition\n2) Subtraction\n3) multiplication \n4)division\n");
+  scanf("%d",&n);
+  switch(n)
+  {
+    case 1 : 
+              
+                printf("enter 1st no ");
+                scanf("%f",&a);
+                printf("enter 2nd no ");
+                scanf("%f",&b);
+                printf("Addition of two no is %.2f",a+b);
+                break;
+    case 2 :
+                printf("enter 1st no ");
+                scanf("%f",&a);
+                printf("enter 2nd no ");
+                scanf("%f",&b);
+                printf("Subtraction of two no is %.2f",a-b);
+                break;
+    case 3 :   
+                printf("enter 1st no ");
+                scanf("%f",&a);
+                printf("enter 2nd no ");
+                scanf("%f",&b);
+                printf("multiplication of two no is %.2f",a*b);
+                break;
+    case 4 :  
+                printf("enter 1st no ");
+                scanf("%f",&a);
+                printf("enter 2nd no ");
+                scanf("%f",&b);
+                printf("division of two no is %.2f",a/b);
+                break;
+    default :
+                printf("Enter proper value\n");
+  }
+  return 0;
+}
