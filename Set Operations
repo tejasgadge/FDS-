@@ -1,0 +1,178 @@
+# include<stdio.h>
+void show(int size,int *arr)
+{
+    printf("elelments of set : { ");
+    for (int i=0;i<size;i++)
+    {
+        printf("%d ",*arr);
+        arr++;
+    }
+    printf("}\n");
+}
+void unions(int size1,int size2,int arr1[],int arr2[])
+{
+    int i=0,j=0;
+    printf("\n-----------Union of two is-------------\n");
+    printf("{ ");
+    for( i=0;i<size1;i++)
+    {
+       printf("%d ",arr1[i]);
+    }
+   
+    for ( i = 0; i < size2; i++)
+    {
+        for ( j = 0; j < size1; j++)
+        {
+            if(arr2[i]==arr1[j]) 
+            {
+                break;
+            }
+        }
+        if(j==size1)
+              printf("%d ",arr2[i]);
+    }
+    printf("}\n");
+    
+}
+void intersection(int size1,int size2,int arr1[],int arr2[])
+{
+    int i=0,j=0;
+    printf("\n-----------Intersection of two is-------------\n");
+    printf("{ ");
+    for ( i = 0; i < size2; i++)
+    {
+        for ( j = 0; j < size1; j++)
+        {
+            if(arr2[i]==arr1[j]) 
+            {
+                printf("%d ",arr2[i]);
+                break;
+            }
+        }
+    }
+    printf("}\n");
+}
+void difference(int size1,int size2,int arr1[],int arr2[])
+{
+    int i=0,j=0;
+    printf("\n-----------Set difference of two is-------------\n");
+    printf("(A-B)= { ");
+    for ( i = 0; i < size1; i++)
+    {
+        for ( j = 0; j < size2; j++)
+        {
+            if(arr1[i]==arr2[j]) 
+            {
+                break;
+            }
+        }
+        if(j==size2)
+        {
+            printf("%d ",arr1[i]);
+        }
+    }
+    printf("}\n");
+    printf("(B-A)= { ");
+    for ( i = 0; i < size2; i++)
+    {
+        for ( j = 0; j < size1; j++)
+        {
+            if(arr1[j]==arr2[i]) 
+            {
+                break;
+            }
+        }
+        if(j==size1)
+        {
+            printf("%d ",arr2[i]);
+        }
+    }
+    printf("}\n");
+}
+void symdiff(int size1,int size2,int arr1[],int arr2[])
+{
+    int i=0,j=0;
+    printf("\n-----------Symmetric difference of two is-------------\n");
+    printf("{ ");
+    for ( i = 0; i < size1; i++)
+    {
+        for ( j = 0; j < size2; j++)
+        {
+            if(arr1[i]==arr2[j]) 
+            {
+                break;
+            }
+        }
+        if(j==size2)
+            printf("%d ",arr1[i]);
+    }
+    for ( i = 0; i < size2; i++)
+    {
+        for ( j = 0; j < size1; j++)
+        {
+            if(arr2[i]==arr1[j]) 
+            {
+                break;
+            }
+        }
+        if(j==size1)
+            printf("%d ",arr2[i]);
+    }
+    printf("}\n");
+}
+int main()
+{
+    int size1,size2;
+    printf("Enter size of set 1  : ");
+    scanf("%d",&size1);
+    int arr1[size1];
+    printf("Enter elelments  : ");
+    for(int i=0;i<size1;i++)
+    {
+        scanf("%d",&arr1[i]);
+    }
+    show(size1,arr1);
+    
+    printf("\nEnter size of set 2  : ");
+    scanf("%d",&size2);
+    int arr2[size2];
+    printf("Enter elelments  : ");
+    for(int i=0;i<size2;i++)
+    {
+        scanf("%d",&arr2[i]);
+    }
+    show(size2,arr2);
+
+    int choice;
+    printf("\nEnter choice : 1.Union 2.intersection 3.Set difference 4.Symmetric difference 5.All operations : ");
+    scanf("%d",&choice);
+    switch (choice)
+    {
+    case 1 :
+    unions(size1,size2,arr1,arr2);
+    break;
+
+    case 2 :
+    intersection(size1,size2,arr1,arr2);
+    break;
+
+    case 3 :
+    difference(size1,size2,arr1,arr2);
+    break;
+  
+    case 4 :
+    symdiff(size1,size2,arr1,arr2);
+    break;
+
+    case 5 :
+    unions(size1,size2,arr1,arr2);
+    intersection(size1,size2,arr1,arr2);
+    difference(size1,size2,arr1,arr2);
+    symdiff(size1,size2,arr1,arr2);
+    break;
+    default:
+    printf("\nEnter proper choice \n");
+    break;
+    }
+
+}
