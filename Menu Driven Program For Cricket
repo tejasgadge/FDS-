@@ -1,0 +1,177 @@
+#include <stdio.h>
+#include<string.h>
+struct cricket
+{
+  char name[15],country[15];
+  char category[15];
+  int run;
+  int wickets;
+  float avg;
+};
+
+int main(void)
+{
+  int n;
+  printf("Enter no of players : ");
+  scanf("%d",&n);
+  struct cricket players[n];
+  for(int i=0;i<n;i++)
+  {
+    printf("\nEnter information of player no %d ---> ",(i+1));
+    printf("\nName : ");
+    scanf("%s",players[i].name);
+     printf("\nCountry : ");
+    scanf("%s",players[i].country);
+     printf("\nCategory : ");
+    scanf("%s",players[i].category);
+    printf("\nRuns : ");
+    scanf("%d",&players[i].run);
+    printf("\nWickets Taken : ");
+    scanf("%d",&players[i].wickets);
+    printf("\nAverage Score : ");
+    scanf("%f",&players[i].avg);
+  }
+  int choice;
+  jump :
+  printf("\n\nEnter choice : \n1. Show sorted list \n2. Search batsman with highest Score \n3. Search bowler with highest wickets \n4. Number of batsman of particular country \n5. Number of bowler of particular country  \n6. Display Board Information \n7 Particular player info \n8. Stop \n ");
+  scanf("%d",&choice);
+  switch(choice)
+  {
+    case 1 :
+    {
+      int i,j,key;
+      struct cricket temp;
+      for(i=1;i<n;i++)
+      {
+        temp=players[i];
+        key=players[i].avg;
+        j=i-1;
+        while(j>=0 && players[j].avg < key)
+        {
+          players[j+1]=players[j];
+          j=j-1;
+        }
+        players[j+1]=temp;
+      }
+      goto jump1;
+      break;
+    }
+    case 2 :
+    {
+      float max=0;
+      int max_index=0;
+      for(int i=0;i<n;i++)
+      {
+        if(players[i].avg>max)
+        {
+          max=players[i].avg;
+          max_index=i;
+        }
+      }
+      printf("\n %s is having score %f\n",players[max_index].name,players[max_index].avg);
+      goto jump;
+      break;
+    }
+    case 3 :
+    {
+      float max=0;
+      int max_index=0;
+      for(int i=0;i<n;i++)
+      {
+        if(players[i].wickets>max)
+        {
+          max=players[i].wickets;
+          max_index=i;
+        }
+      }
+      printf("\n %s has taken  %d wickets\n",players[max_index].name,players[max_index].wickets);
+      goto jump;
+      break;
+    }
+    case 4 :
+    {
+      int count=0,flag;
+      char temp[15];
+      char temp1[15]="batsman";
+      printf("\nEnter country : ");
+      scanf("%s",temp);
+      for(int i=0;i<n;i++)
+      {
+        flag=strcmp(temp,players[i].country);
+        if(flag==0)
+        {
+           flag = strcmp(players[i].category,temp1);
+           if(flag==0)
+              count++;
+        }
+      }
+      printf("\n%s is having %d batsman\n",temp,count);
+      goto jump;
+    }
+     case 5 :
+    {
+      int count=0,flag;
+      char temp[15];
+      char temp1[15]="bowler";
+      printf("\nEnter country : ");
+      scanf("%s",temp);
+      for(int i=0;i<n;i++)
+      {
+        flag=strcmp(temp,players[i].country);
+        if(flag==0)
+        {
+           flag = strcmp(players[i].category,temp1);
+           if(flag==0)
+              count++;
+        }
+      }
+      printf("\n%s is having %d bowler\n",temp,count);
+      goto jump;
+      break;
+    }
+    case 6 :
+    {
+      jump1 :
+      printf("\nName \t Runs \t Wickets \t Average Score");
+      for(int i=0;i<n;i++)
+      {
+        printf("\n%s \t %d \t %d \t\t\t %f",players[i].name, players[i].run , players[i].wickets, players[i].avg );
+      }
+      goto jump;
+      break;
+
+    }
+    case 7 :
+    {
+      int flag;
+      char temp[15];
+      printf("\nEnter Name : ");
+      scanf("%s",temp);
+      for(int i=0;i<n;i++)
+      {
+        flag=strcmp(temp,players[i].name);
+        if(flag==0)
+        {
+          printf("\nName : %s ",temp);
+          printf("\nCountry : %s",players[i].country);
+          printf("\nCategory : %s",players[i].category);
+          printf("\nRuns : %d ",players[i].run);
+          printf("\nWickets : %d ",players[i].wickets);
+          printf("\nAverage : %f ",players[i].avg);
+          break;
+        }
+      }
+      goto jump;
+    }
+    case 8 :
+    {
+      break;
+    }
+    default : 
+    {
+      printf("\nEnter proper choice ");
+      break;
+    }
+  } 
+  return 0;
+}
