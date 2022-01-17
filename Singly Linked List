@@ -1,0 +1,144 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node
+{
+  int prn;
+  int rollno;
+  char name[20];
+  struct node *next;
+};
+struct node* create()
+{
+  struct node *head;
+  head=(struct node *)malloc(sizeof(struct node));
+  printf("\nEnter PRN,Roll no and Name \n");
+  scanf("%d%d%s",&head->prn,&head->rollno,head->name);
+  head->next=NULL;
+  return head;
+}
+void add(int m,struct node *head)
+{
+  struct node *temp;
+  for(int i=0;i<m;i++)
+  {
+  temp=(struct node *)malloc(sizeof(struct node));
+  printf("\nEnter prn,rollno and name\n");
+  scanf("%d%d",&temp->prn,&temp->rollno);
+  scanf("%s",temp->name);
+  head->next=temp;
+  temp->next=NULL;
+  head=head->next;
+  }
+}
+
+void adds(struct node *head)
+{
+    while (head->next!=NULL)
+    {
+        head=head->next;
+    }
+    struct node *temp;
+    temp=(struct node *)malloc(sizeof(struct node));
+    printf("Enter prn,rollno and name\n");
+    scanf("%d%d%s",&temp->prn,&temp->rollno,temp->name);
+    head->next=temp;
+    temp->next=NULL;
+}
+void deletem(struct node *head)
+{
+    int prn;
+    printf("\nEnter PRN : ");
+    scanf("%d",&prn);
+    struct node *temp;
+    while (head->prn!=prn)
+    {
+        /* code */
+        temp=head;
+        head=head->next;
+    }
+    temp->next=head->next;
+    free(head);    
+}
+struct node* deletep(struct node *head)
+{
+    struct node *temp=head->next;
+    free(head);
+    return temp;
+}
+void deletesc(struct node *head)
+{
+    struct node *temp;
+    while (head->next!=NULL)
+    {
+        /* code */
+        temp=head;
+        head=head->next;
+    }
+    temp->next=NULL;
+    free(head);
+}
+void compute(struct node *head)
+{
+  int i=0;
+  while(head!=NULL)
+  {
+    i++;
+    head=head->next;
+  }
+  printf("\nTotal no of nodes are %d",i);
+}
+void display(struct node *head)
+{
+  printf("\nPRN\tRollno\tName");
+  while(head!=NULL)
+  {
+    printf("\n%d\t %d\t\t %s",head->prn,head->rollno,head->name);
+    head=head->next;
+  }
+}
+int main(void)
+{
+  int a;
+  char y;
+  struct node *head;
+  do
+  {
+    printf("\nEnter your choice \n1.Create \n2.Addmember \n3.Deletemember \n4.Add secretory  \n5.DeleteSecretory \n6.Delete President\n7.Display\n8.compute nodes\n");
+    scanf("%d",&a);
+    switch(a)
+    {
+      case 1 : head=create();
+               break;
+      
+      case 2 : {
+               int m;
+               printf("\nHow many members u want to add : ");
+               scanf("%d",&m);
+               add(m,head);
+               break;
+               }
+
+      case 3 : deletem(head);
+               break;
+
+      case 4 : adds(head);
+               break;
+          
+      case 5 : deletesc(head);
+               break;
+
+      case 6 : head=deletep(head);
+               break;
+
+      case 7 : display(head);
+               break;
+      case 8 : compute(head);
+               break;
+      default : printf("\nExist");
+    }
+    printf("\nDo u want to continue(y/n) : ");
+    scanf(" %c",&y);
+  }while(y=='y');
+  
+}
